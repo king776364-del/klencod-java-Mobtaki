@@ -25,7 +25,6 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // تصميم الواجهة برمجياً بالألوان الخضراء الداكنة الخاصة بمبتكر
         ScrollView scrollView = new ScrollView(this);
         scrollView.setBackgroundColor(0xFF0A1F13);
         
@@ -33,7 +32,6 @@ public class MainActivity extends Activity {
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setPadding(30, 40, 30, 40);
 
-        // شريط الحالة والتجربة المجانية
         statusText = new TextView(this);
         statusText.setText("تجربة مجانية نشطة (متبقي: 30 يوم)");
         statusText.setTextColor(0xFF00C853);
@@ -41,7 +39,6 @@ public class MainActivity extends Activity {
         statusText.setPadding(20, 20, 20, 20);
         layout.addView(statusText);
 
-        // زر ترقية بريميوم ومحفظة جيب
         btnPay = new Button(this);
         btnPay.setText("ترقية البريميوم (7,000 ر.ي - محفظة جيب)");
         btnPay.setBackgroundColor(0xFF112E1F);
@@ -54,7 +51,6 @@ public class MainActivity extends Activity {
         });
         layout.addView(btnPay);
 
-        // اختيار المنصة
         TextView lblPlatform = new TextView(this);
         lblPlatform.setText("\nاختر منصة صنع التطبيق:");
         lblPlatform.setTextColor(0xFF00C853);
@@ -93,7 +89,6 @@ public class MainActivity extends Activity {
         platformLayout.addView(btnIos);
         layout.addView(platformLayout);
 
-        // حقل كتابة فكرة التطبيق بالعربية
         TextView lblIdea = new TextView(this);
         lblIdea.setText("\nاكتب فكرة تطبيقك باللغة العربية:");
         lblIdea.setTextColor(0xFF00C853);
@@ -107,7 +102,6 @@ public class MainActivity extends Activity {
         promptInput.setBackgroundColor(0xFF112E1F);
         layout.addView(promptInput);
 
-        // زر التوليد بالذكاء الاصطناعي
         btnGenerate = new Button(this);
         btnGenerate.setText("\nتوليد التطبيق بالذكاء الاصطناعي\n");
         btnGenerate.setBackgroundColor(0xFF00C853);
@@ -125,7 +119,6 @@ public class MainActivity extends Activity {
         });
         layout.addView(btnGenerate);
 
-        // شاشة عرض النتيجة والكود
         resultText = new TextView(this);
         resultText.setText("\n[انتظار إدخال الفكرة للتوليد...]");
         resultText.setTextColor(0xFFCCCCCC);
@@ -136,7 +129,6 @@ public class MainActivity extends Activity {
         setContentView(scrollView);
     }
 
-    // نافذة الدفع عبر محفظة جيب المباشر (7,000 ريال يمني) دون إظهار رقم الهاتف
     private void showJeepPaymentDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("رابط الدفع المباشر - محفظة جيب");
@@ -145,10 +137,12 @@ public class MainActivity extends Activity {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://jeep.ye/pay?amount=7000&currency=YER"));
             startActivity(browserIntent);
             
-            // محاكاة نجاح التفعيل البريميوم بعد الدفع
             isPremium = true;
             statusText.setText("النسخة البريميوم مفعلة ومحمية (مشفرة)");
             statusText.setTextColor(0xFFFFD700);
             Toast.makeText(MainActivity.this, "تم تفعيل النسخة البريميوم بنجاح تام!", Toast.LENGTH_LONG).show();
         });
-        
+        builder.setNegativeButton("إلغاء", (dialog, which) -> dialog.dismiss());
+        builder.show();
+    }
+}
